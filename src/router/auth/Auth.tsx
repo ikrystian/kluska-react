@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import banner from '../../assets/login-banner.jpg'
-export default function Auth() {
+export default function App() {
     return (
         <>
             {/* all the other elements */}
