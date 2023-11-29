@@ -4,15 +4,15 @@ import { signal } from "@preact/signals-core";
 import { token } from '../router/auth/AuthSignal.ts';
 
 export default function LoginForm() {
-    const email = signal('');
-    const password = signal('');
+
+    const userForm = signal({email: '', password: ''})
 
 
     const login = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const user = {
-            email: email.value,
-            password: password.value
+            email: userForm.value.email,
+            password: userForm.value.password
         }
 
         axios.post(`${import.meta.env.VITE_API_URL}auth/signin`, user, {
@@ -30,19 +30,20 @@ export default function LoginForm() {
     }
     return (
         <form onSubmit={login}>
-            <div className={'flex flex-col mb-2'}>
-                <label htmlFor="email" className={'text-white mb-1'}>E-mail</label>
+            <div className={'flex flex-col gap-2 mb-2'}>
+                <label htmlFor="email"
+                       className={'text-white'} >E-mail</label>
                 <input type="email" id="email" name="email"
                        onChange={(event) => {
-                           email.value = event.target.value;
+                           userForm.value.email = event.target.value;
                        }}
                        className="email py-1 px-3 outline" required/>
             </div>
             <div className={'flex flex-col mb-5'}>
-                <label htmlFor="password" className={'text-white mb-1'}>Password</label>
+                <label htmlFor="password" className={'text-white'}>Password</label>
                 <input type="password" id="password" name="password" className="password  py-1 px-3 outline"
                        onChange={(event) => {
-                           password.value = event.target.value;
+                           userForm.value.password = event.target.value;
                        }}
                        required/>
             </div>

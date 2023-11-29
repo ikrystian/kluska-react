@@ -1,4 +1,4 @@
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -23,36 +23,40 @@ export default function RegisterForm() {
         )
         .required()
 
-    const { register, handleSubmit ,  formState: {errors}} = useForm<Inputs>({
+    const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
         resolver: yupResolver(schema), // yup, joi and even your own.
     })
 
 
-    const onSubmit =  (data: Inputs) => {
+    const onSubmit = (data: Inputs) => {
         console.log(data);
     }
 
     return (
         <>
-            <form className="py-3" onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                <label>Name</label>
-                <input {...register("name", {required: "Please enter your first name.",})}  />
-                    {errors.name && <p>{errors.name.message}</p>}
+            <form  onSubmit={handleSubmit(onSubmit)}>
+                <div className={'flex flex-col gap-2'}>
+                    <label className={'text-white'}>Name</label>
+                    <input
+                        className={'py-1 px-3 outline'} {...register('name')}  />
+                        {errors.name && <p className={'text-red-500 text-xs'}>{errors.name.message}</p>}
                 </div>
-                <div>
-                    <label>E-mail</label>
-                    <input {...register("email")}  />
+                <div className={'flex flex-col gap-2 mt-2'}>
+                    <label className={'text-white'}>E-mail</label>
+                    <input  className={'py-1 px-3 outline'} {...register('email')}  />
+                    {errors.email && <p className={'text-red-500 text-xs'}>{errors.email.message}</p>}
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input {...register("password")}  />
+                <div className={'flex flex-col gap-2 mt-2'}>
+                    <label className={'text-white'}>Password</label>
+                    <input className={'py-1 px-3 outline'} {...register('password')}  />
+                    {errors.password && <p className={'text-red-500 text-xs'}>{errors.password.message}</p>}
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input {...register("password_confirmation")}  />
+                <div className={'flex flex-col gap-2 mt-2'}>
+                    <label className={'text-white'}>Re-password</label>
+                    <input className={'py-1 px-3 outline'} {...register('password_confirmation')}  />
+                    {errors.password_confirmation && <p className={'text-red-500 text-xs'}>{errors.password_confirmation.message}</p>}
                 </div>
-                <button type={'submit'}>Register</button>
+                <button type={'submit'} className={'block w-full p-2 bg-blue-950 mb-5 mt-5 text-white'}>Register</button>
             </form>
         </>
     )
