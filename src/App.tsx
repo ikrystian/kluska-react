@@ -38,6 +38,7 @@ export default function App() {
             <IconButton
                 size="small"
                 aria-label="close"
+                color="primary"
                 onClick={handleClose}
             >
                 <CloseIcon fontSize="small"/>
