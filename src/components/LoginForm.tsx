@@ -26,7 +26,7 @@ export default function LoginForm() {
                 if (error.response.status === 401) {
                     alert('Unauthorized');
                 } else {
-                    console.info(error)
+                    console.error(error)
                 }
             })
     }
