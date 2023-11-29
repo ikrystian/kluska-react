@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     const login = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -12,7 +12,8 @@ export default function LoginForm() {
             email,
             password
         }
-        axios.post('https://kluska.archcode.rs/api/public/api/auth/signin', user, {
+
+        axios.post(`${import.meta.env.VITE_API_KEY}auth/signin`, user, {
             headers: {'Content-Type': 'application/json'}
         })
             .then(res => {
