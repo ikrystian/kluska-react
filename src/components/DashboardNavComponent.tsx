@@ -1,12 +1,5 @@
-import { snackBar, token } from '../router/auth/AuthSignal.ts';
 
 const DashboardNavComponent = () => {
-    const logOut = () => {
-        token.value = '';
-        localStorage.removeItem('token');
-        snackBar.value = {'message': 'Logged out', 'status': true};
-    }
-
     return (
         <nav className={'flex justify-end h-auto items-center gap-2'}>
             <button className={'w-8 h-8 flex justify-center items-center'}>
@@ -23,7 +16,6 @@ const DashboardNavComponent = () => {
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
                 </svg>
             </button>
-            <button onClick={logOut} className={'block py-2 px-3 text-white'}>Log out</button>
         </nav>
     )
 }
