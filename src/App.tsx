@@ -24,7 +24,6 @@ const GuestRoute = ({children}: { children: React.ReactNode }) => {
     return children;
 };
 
-
 export default function App() {
 
     const router = createBrowserRouter([

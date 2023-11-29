@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { noAuthRequest } from '../helpers.ts';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterForm() {
 
@@ -27,9 +29,13 @@ export default function RegisterForm() {
         resolver: yupResolver(schema), // yup, joi and even your own.
     })
 
+    const navigate = useNavigate();
 
     const onSubmit = (data: Inputs) => {
-        console.log(data);
+        noAuthRequest('auth/signup', data).then(response => {
+            navigate('/auth/login');
+            alert(response.message);
+        })
     }
 
     return (

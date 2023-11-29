@@ -1,13 +1,20 @@
 import axios from 'axios';
 
-export const noAuthRequest = (path: string, data: unknown ) => {
-    axios.post(`${import.meta.env.VITE_API_URL}${path}`, data)
-        .then(res => {
-            return res;
-        })
-        .catch((error) => {
-            console.error(error);
-        })
+export const  noAuthRequest = async (path: string, data: unknown ) => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}${path}`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    });
+
+    return response.json();
 }
 
 export const request = (path: string, data: unknown) => {
@@ -21,3 +28,4 @@ export const request = (path: string, data: unknown) => {
             console.error(error);
         })
 }
+
