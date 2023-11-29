@@ -32,17 +32,17 @@ export default function LoginForm() {
     }
     return (
         <form onSubmit={login}>
-            <div>
-                <label htmlFor="email">E-mail</label>
-                <input type="email" id="email" name="email" value={email} className="email"
+            <div className={'flex flex-col mb-2'}>
+                <label htmlFor="email" className={'text-white mb-1'}>E-mail</label>
+                <input type="email" id="email" name="email" value={email} className="email py-1 px-3 outline"
                        onChange={(event) => setEmail(event.target.value)} required/>
             </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input type="passowrd" id="password" name="password" value={password} className="password"
+            <div className={'flex flex-col mb-5'}>
+                <label htmlFor="password" className={'text-white mb-1'}>Password</label>
+                <input type="passowrd" id="password" name="password" value={password} className="password  py-1 px-3 outline"
                        onChange={(event) => setPassword(event.target.value)} required/>
             </div>
-            <button type="submit" className={'inline-flex p-2'}>Log in</button>
+            <button type="submit" className={'block w-full p-2 bg-blue-950 mb-5 text-white'}>Log in</button>
         </form>
     );
 }

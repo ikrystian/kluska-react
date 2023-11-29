@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 
 export default function Login() {
     return (
-        <>
+        <div className="px-3">
             <LoginForm />
-            <p>Nie masz jeszcze konta? <Link to={'/auth/register'}>Zarejestruj się</Link></p>
+            <p className="text-center text-blue-50 flex flex-col gap-2 justify-center">
+                <span>Nie chcesz dalej być leniwa kluska? </span>
+                <Link to={'/auth/register'} className={'text-blue-50 underline'}>Zarejestruj się !</Link>
+            </p>
 
-        </>
+        </div>
     )
 }
