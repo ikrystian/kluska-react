@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { signal } from "@preact/signals-core";
+import { token } from '../router/auth/AuthSignal.ts';
 
 export default function LoginForm() {
     const email = signal('');
     const password = signal('');
+
 
     const login = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -18,20 +20,13 @@ export default function LoginForm() {
         })
             .then(res => {
                 if (res.status === 200) {
-                    const token = res.data.access_token;
-                    localStorage.setItem('token', token);
-                    alert(`Loggedn, your token is ${token}`)
+                    localStorage.setItem('token', res.data.access_token);
+                    token.value = res.data.access_token;
                 }
 
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    alert('Unauthorized');
-                } else if (error.response.status === 422) {
-                    alert(error.response.data.password[0])
-                } else {
-                    console.error(error)
-                }
+                console.error(error);
             })
     }
     return (
