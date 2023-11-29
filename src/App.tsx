@@ -4,10 +4,13 @@ import ErrorPage from './error-page.tsx';
 import Auth from './router/auth/Auth.tsx';
 import Login from './router/auth/Login.tsx';
 import Register from './router/auth/Register.tsx';
-import { isLoggedIn } from './router/auth/AuthSignal.ts';
+import { isLoggedIn, snackBar } from './router/auth/AuthSignal.ts';
 import Home from './router/home/Home';
 import Dashboard from './router/home/Dashboard.tsx';
 import React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
 
@@ -25,6 +28,22 @@ const GuestRoute = ({children}: { children: React.ReactNode }) => {
 };
 
 export default function App() {
+    const handleClose = () => {
+        snackBar.value = {"message": "", "status": false};
+    };
+
+
+    const action = (
+        <>
+            <IconButton
+                size="small"
+                aria-label="close"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small"/>
+            </IconButton>
+        </>
+    );
 
     const router = createBrowserRouter([
         {
@@ -63,6 +82,13 @@ export default function App() {
             {/* all the other elements */}
             <div className="h-[100dvh] bg-[#1A1B1F]">
                 <RouterProvider router={router}/>
+                <Snackbar
+                    open={snackBar.value.status}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    message={snackBar.value.message}
+                    action={action}
+                />
             </div>
         </>
     );

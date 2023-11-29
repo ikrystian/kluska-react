@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { noAuthRequest } from '../helpers.ts';
 import { useNavigate } from 'react-router-dom';
+import { snackBar } from '../router/auth/AuthSignal.ts';
 
 export default function RegisterForm() {
 
@@ -25,7 +26,7 @@ export default function RegisterForm() {
         )
         .required()
 
-    const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({
+    const {register, handleSubmit, reset, formState: {errors}} = useForm<Inputs>({
         resolver: yupResolver(schema), // yup, joi and even your own.
     })
 
@@ -33,11 +34,11 @@ export default function RegisterForm() {
 
     const onSubmit = (data: Inputs) => {
         noAuthRequest('auth/signup', data).then(response => {
+            snackBar.value = { "message": response.message, "status": true };
+            reset({ ...data })
             navigate('/auth/login');
-            alert(response.message);
         })
     }
-
     return (
         <>
             <form  onSubmit={handleSubmit(onSubmit)}>
