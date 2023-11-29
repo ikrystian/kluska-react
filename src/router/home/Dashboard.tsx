@@ -17,6 +17,7 @@ export default function Dashboard() {
         };
         axios.get(`${import.meta.env.VITE_API_URL}auth/user`, config).then(res => {
             setUser(res.data)
+            console.log(res.data);
         })
     }, []);
 
