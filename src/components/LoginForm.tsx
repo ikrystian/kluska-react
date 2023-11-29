@@ -23,7 +23,6 @@ export default function LoginForm() {
                     localStorage.setItem('token', res.data.access_token);
                     token.value = res.data.access_token;
                 }
-
             })
             .catch((error) => {
                 console.error(error);
