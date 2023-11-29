@@ -10,8 +10,8 @@ export default function Login() {
                 <div role={'alert'} className={'mb-3 text-center text-white'}>See U soon!</div>
             }
             <LoginForm/>
-            <p className="text-center text-blue-50 flex gap-2 justify-center">
-                <span>Nie chcesz dalej być leniwa kluska? </span>
+            <p className="text-center text-blue-50">
+                <span className={'block'}>Nie chcesz dalej być leniwa kluska? </span>
                 <Link to={'/auth/register'} className={'text-blue-50 underline'}>Zarejestruj się !</Link>
             </p>
 

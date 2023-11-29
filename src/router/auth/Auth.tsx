@@ -5,7 +5,7 @@ export default function App() {
     return (
         <>
             {/* all the other elements */}
-            <div id="auth" className="h-[100dvh] bg-[#1A1B1F]">
+            <div id="auth">
                 <div className="overflow-hidden py-2 px-3 mb-5 relative">
                     <div className={'bg-gradient-to-t from-gray-950 to-transparent absolute inset-0'}></div>
                     <img src={banner} alt="" className="rounded-2xl"/>

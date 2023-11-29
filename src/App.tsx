@@ -30,7 +30,7 @@ export default function App() {
     const router = createBrowserRouter([
         {
             path: '/',
-            element: <Welcome/>,
+            element: <GuestRoute><Welcome/></GuestRoute>,
             errorElement: <ErrorPage/>,
         },
         {
@@ -62,7 +62,7 @@ export default function App() {
     return (
         <>
             {/* all the other elements */}
-            <div id="auth" className="h-[100dvh] bg-[#1A1B1F]">
+            <div className="h-[100dvh] bg-[#1A1B1F]">
                 <RouterProvider router={router}/>
             </div>
         </>
