@@ -37,53 +37,39 @@ const itemData = [
         title: 'Laptop',
     },
     {
-        img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
-        title: 'Doors',
+        img: 'https://images.unsplash.com/photo-1701220319318-4b102144f8e8',
+        title: 'lorem'
     },
     {
-        img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
-        title: 'Coffee',
+        img: 'https://images.unsplash.com/photo-1701079169931-efac6c6847ce',
+        title: 'lorem'
     },
     {
-        img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
-        title: 'Storage',
+        img: 'https://images.unsplash.com/photo-1701007839975-594820067d4c',
+        title: 'lorem'
     },
     {
-        img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-        title: 'Candle',
+        img: 'https://images.unsplash.com/photo-1682687982502-b05f0565753a',
+        title: 'lorem'
     },
     {
-        img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
-        title: 'Coffee table',
+        img: 'https://images.unsplash.com/photo-1700317440744-a126fc87b900',
+        title: 'lorem'
     },
     {
-        img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
-        title: 'Doors',
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
-        title: 'Coffee',
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
-        title: 'Storage',
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-        title: 'Candle',
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
-        title: 'Coffee table',
-    },
+        img: 'https://images.unsplash.com/photo-1701206886289-05bc76ff6071',
+        title: 'lorem'
+    }
 ];
+
 export interface SimpleDialogProps {
     open: boolean;
     imageUrl: string;
     onClose: (value: string) => void;
 }
+
 function SimpleDialog(props: SimpleDialogProps) {
-    const { onClose, imageUrl, open } = props;
+    const {onClose, imageUrl, open} = props;
 
     const handleClose = () => {
         onClose(imageUrl);
@@ -91,7 +77,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     return (
         <Dialog onClose={handleClose} open={open}>
-            <DialogTitle> <img loading="lazy" alt="" src={imageUrl} /> </DialogTitle>
+            <DialogTitle> <img loading="lazy" alt="" src={imageUrl}/> </DialogTitle>
         </Dialog>
     );
 }
@@ -112,10 +98,12 @@ export default function ProfileGalery() {
     return (
         <main className={'flex flex-auto flex-col justify-end max-h-[calc(100vh-56px)]'}>
 
-            <Box sx={{ overflowY: 'scroll', padding: 1 }}>
+            <Box sx={{overflowY: 'scroll', padding: 1}}>
                 <ImageList variant="masonry" cols={3} gap={8}>
                     {itemData.map((item, index) => (
-                        <ImageListItem key={item.img} onClick={() => { handleClickOpen(index) }}>
+                        <ImageListItem key={item.img} onClick={() => {
+                            handleClickOpen(index)
+                        }}>
                             <img
                                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 src={`${item.img}?w=248&fit=crop&auto=format`}
