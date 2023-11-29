@@ -11,7 +11,10 @@ import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import ProfileGalery from './router/home/ProfileGalery.tsx';
+import ProfileGallery from './router/home/ProfileGallery.tsx';
+import BlankDashboard from './router/home/BlankDashboard.tsx';
+import Summary from './router/home/Summary.tsx';
+import Archive from './router/home/Archive.tsx';
 
 const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
 
@@ -73,11 +76,25 @@ export default function App() {
             children: [
                 {
                     path: 'dashboard',
-                    element: <Dashboard/>
+                    element: <Dashboard/>,
+                    children: [
+                        {
+                            path: '',
+                            element: <BlankDashboard />
+                        },
+                        {
+                            path: 'summary',
+                            element: <Summary />
+                        },
+                        {
+                            path: 'archive',
+                            element: <Archive />
+                        }
+                    ]
                 },
                 {
                     path: 'profile-gallery',
-                    element: <ProfileGalery />
+                    element: <ProfileGallery />
                 }
             ]
         }
@@ -85,8 +102,7 @@ export default function App() {
 
     return (
         <>
-            {/* all the other elements */}
-            <div className="h-[100dvh] bg-[#1A1B1F]">
+            <div className="min-h-[100dvh] bg-[#1A1B1F]">
                 <RouterProvider router={router}/>
                 <Snackbar
                     open={snackBar.value.status}

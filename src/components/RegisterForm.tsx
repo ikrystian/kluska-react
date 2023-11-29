@@ -55,12 +55,12 @@ export default function RegisterForm() {
                 </div>
                 <div className={'flex flex-col gap-2 mt-2'}>
                     <label className={'text-white'}>Password</label>
-                    <input className={'py-1 px-3 outline'} {...register('password')}  />
+                    <input type={'password'} className={'py-1 px-3 outline'} {...register('password')}  />
                     {errors.password && <p className={'text-red-500 text-xs'}>{errors.password.message}</p>}
                 </div>
                 <div className={'flex flex-col gap-2 mt-2'}>
                     <label className={'text-white'}>Re-password</label>
-                    <input className={'py-1 px-3 outline'} {...register('password_confirmation')}  />
+                    <input type={'password'} className={'py-1 px-3 outline'} {...register('password_confirmation')}  />
                     {errors.password_confirmation && <p className={'text-red-500 text-xs'}>{errors.password_confirmation.message}</p>}
                 </div>
                 <button type={'submit'} className={'block w-full p-2 bg-blue-950 mb-5 mt-5 text-white'}>Register</button>

@@ -82,7 +82,7 @@ function SimpleDialog(props: SimpleDialogProps) {
     );
 }
 
-export default function ProfileGalery() {
+export default function ProfileGallery() {
 
     const [open, setOpen] = useState(false);
     const [id, setId] = useState(0);

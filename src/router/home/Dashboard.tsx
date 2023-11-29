@@ -1,78 +1,38 @@
-
-import { useState } from 'react';
-import { AppBar, Box, Tab, Tabs, Typography } from '@mui/material';
-import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import FolderIcon from '@mui/icons-material/Folder';
+import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PersonPinIcon from '@mui/icons-material/PersonPin';
-import SwipeableViews from 'react-swipeable-views';
-
-
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    dir?: string;
-    index: number;
-    value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const {children, value, index, ...other} = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{p: 3}}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 export default function Dashboard() {
 
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-
-    const handleChangeIndex = (index: number) => {
-        setValue(index);
-    };
 
     return (
         <main className={'flex flex-auto flex-col justify-end'}>
-            <SwipeableViews
-                index={value}
-                className={'h-full text-white'}
-                onChangeIndex={handleChangeIndex}
-            >
-                <TabPanel value={value} index={0}>
-                   Add training
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    Stats
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    History
-                </TabPanel>
-            </SwipeableViews>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleChange}
-                      indicatorColor="secondary"
-                      textColor="inherit"
-                      variant="fullWidth">a
-                    <Tab icon={<SpaceDashboardIcon/>} aria-label="phone"/>
-                    <Tab icon={<FavoriteIcon/>} aria-label="favorite"/>
-                    <Tab icon={<PersonPinIcon/>} aria-label="person"/>
-                </Tabs>
-            </AppBar>
+            <Outlet/>
+            <BottomNavigation sx={{ width: 500 }}  value={useLocation().pathname}>
+                <BottomNavigationAction
+                    label="Recents"
+                    icon={<RestoreIcon />}
+                    component={Link}
+                    to="/home/dashboard/"
+                />
+                <BottomNavigationAction
+                    label="Stats"
+                    icon={<FavoriteIcon />}
+                    component={Link}
+                    to="/home/dashboard/summary"
+                />
+                <BottomNavigationAction
+                    label="Archive"
+                    icon={<LocationOnIcon />}
+                    component={Link}
+                    to="/home/dashboard/archive"
+                />
+                <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+            </BottomNavigation>
         </main>
     )
 }
