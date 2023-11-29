@@ -3,7 +3,7 @@ import axios from 'axios';
 import { signal } from "@preact/signals-core";
 
 export default function LoginForm() {
-    const email = signal('krystian@bpcoders.pl');
+    const email = signal('');
     const password = signal('');
 
     const login = (event: React.FormEvent<HTMLFormElement>) => {
