@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
 
     if (!isLoggedIn.value) {
-        return <Navigate to="/auth/login" state={{from: 'dashboard'}} replace/>;
+        return <Navigate to="/auth/login" replace/>;
     }
     return children;
 };
