@@ -11,6 +11,7 @@ import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import ProfileGalery from './router/home/ProfileGalery.tsx';
 
 const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
 
@@ -73,6 +74,10 @@ export default function App() {
                 {
                     path: 'dashboard',
                     element: <Dashboard/>
+                },
+                {
+                    path: 'profile-gallery',
+                    element: <ProfileGalery />
                 }
             ]
         }

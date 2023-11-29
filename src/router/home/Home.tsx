@@ -1,9 +1,9 @@
-import IconButton from "@mui/material/IconButton";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { AccountCircle } from '@mui/icons-material';
 
 
 export default function Home() {
@@ -41,9 +41,12 @@ export default function Home() {
                 <Outlet/>
                 <nav className={'flex items-center gap-2 py-1 px-2'}>
                     {user && <Avatar  {...stringAvatar(user.name)} /> }
-                    <IconButton aria-label="delete" size="large" color="primary">
-                        <HomeIcon/>
-                    </IconButton>
+                    <Link to={'/home/dashboard'} className={'w-12 h-12 flex items-center justify-center'}>
+                        <HomeIcon color="primary"/>
+                    </Link>
+                    <Link to={'/home/profile-gallery'} className={'w-12 h-12 flex items-center justify-center'}>
+                        <AccountCircle color="primary"/>
+                    </Link>
                 </nav>
             </div>
         </>
