@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { TextField } from '@mui/material';
 import axios from 'axios';
 import { token } from '../router/auth/AuthSignal.ts';
+import { LoadingButton } from '@mui/lab';
+import { useState } from 'react';
 
 class FromData {
 }
@@ -14,6 +16,8 @@ export default function LoginForm() {
         email: string;
         password: string;
     }
+
+    const [loading, setLoading] = useState(false);
 
     const schema = yup
         .object()
@@ -30,6 +34,7 @@ export default function LoginForm() {
     })
 
     const onSubmit = (data: FromData) => {
+        setLoading(true);
         axios.post(`${import.meta.env.VITE_API_URL}auth/signin`, data, {
             headers: {'Content-Type': 'application/json'}
         })
@@ -56,7 +61,11 @@ export default function LoginForm() {
                            helperText={errors.password && errors.password.message} id="password" label="Password"
                            variant="outlined"/>
             </div>
-            <button type="submit" className={'block w-full p-2 bg-blue-950 mb-5 text-white'}>Log in</button>
+            <div className={'flex justify-center mt-4 mb-8'}>
+            <LoadingButton type="submit" loading={loading} variant="outlined">
+                Log in
+            </LoadingButton>
+            </div>
         </form>
     );
 }
