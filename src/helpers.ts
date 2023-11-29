@@ -29,3 +29,11 @@ export const request = (path: string, data: unknown) => {
         })
 }
 
+export const getRequest = async (path: string) => {
+    const config = {
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+    };
+    const respoonse = await fetch(`${import.meta.env.VITE_API_URL}${path}`, config);
+    return await respoonse.json();
+}
+

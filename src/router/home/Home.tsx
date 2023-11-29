@@ -2,10 +2,10 @@ import { Link, Outlet } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { AccountCircle, Logout } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { snackBar, token } from '../auth/AuthSignal.ts';
+import { getRequest } from '../../helpers.ts';
 
 
 export default function Home() {
@@ -17,7 +17,6 @@ export default function Home() {
     }
 
     function stringAvatar(name: string) {
-        if (!name) return;
         return {
             sx: {
                 bgcolor: '#090909',
@@ -35,17 +34,14 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const config = {
-            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-        };
-        axios.get(`${import.meta.env.VITE_API_URL}auth/user`, config).then(res => {
-            setUser(res.data)
+        getRequest('auth/user').then(res => {
+            setUser(res)
         })
     }, []);
 
     return (
         <>
-            <div id="home" className="h-[100dvh] bg-[#1A1B1F] flex flex-col ">
+            <div id="home" className="h-[100dvh] bg-[#1A1B1F] flex flex-col">
                 <Outlet/>
                 <nav className={'flex items-center gap-2 py-1 px-2'}>
                     <div className={'flex flex-1 items-center'}>

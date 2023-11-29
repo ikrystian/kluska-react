@@ -1,4 +1,12 @@
-import { Box, ImageList, ImageListItem } from '@mui/material';
+import {
+    Box,
+    Dialog,
+    DialogTitle,
+    ImageList,
+    ImageListItem,
+} from '@mui/material';
+import { useState } from 'react';
+
 const itemData = [
     {
         img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
@@ -69,14 +77,45 @@ const itemData = [
         title: 'Coffee table',
     },
 ];
+export interface SimpleDialogProps {
+    open: boolean;
+    imageUrl: string;
+    onClose: (value: string) => void;
+}
+function SimpleDialog(props: SimpleDialogProps) {
+    const { onClose, imageUrl, open } = props;
+
+    const handleClose = () => {
+        onClose(imageUrl);
+    };
+
+    return (
+        <Dialog onClose={handleClose} open={open}>
+            <DialogTitle> <img loading="lazy" alt="" src={imageUrl} /> </DialogTitle>
+        </Dialog>
+    );
+}
+
 export default function ProfileGalery() {
+
+    const [open, setOpen] = useState(false);
+    const [id, setId] = useState(0);
+    const handleClickOpen = (data: number) => {
+        setId(data);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <main className={'flex flex-auto flex-col justify-end max-h-[calc(100vh-56px)]'}>
+
             <Box sx={{ overflowY: 'scroll', padding: 1 }}>
                 <ImageList variant="masonry" cols={3} gap={8}>
-                    {itemData.map((item) => (
-                        <ImageListItem key={item.img}>
+                    {itemData.map((item, index) => (
+                        <ImageListItem key={item.img} onClick={() => { handleClickOpen(index) }}>
                             <img
                                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 src={`${item.img}?w=248&fit=crop&auto=format`}
@@ -87,6 +126,11 @@ export default function ProfileGalery() {
                     ))}
                 </ImageList>
             </Box>
+            <SimpleDialog
+                imageUrl={itemData[id].img}
+                open={open}
+                onClose={handleClose}
+            />
         </main>
     )
-};
+}
